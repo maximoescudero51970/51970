@@ -1,0 +1,9 @@
+accion "seguridad" {
+
+notificar "Inicio"
+
+moverArchivo "imagenes"
+
+usarEscaneoProfundo
+
+retornar "ERROR"

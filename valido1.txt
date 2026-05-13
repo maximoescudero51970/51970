@@ -1,0 +1,11 @@
+accion "backup" {
+
+moverArchivo "documentos"
+
+usarEscaneoProfundo
+
+notificar "Proceso terminado"
+
+retornar "OK"
+
+}

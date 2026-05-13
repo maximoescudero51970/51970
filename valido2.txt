@@ -1,0 +1,13 @@
+accion "seguridad" {
+
+notificar "Iniciando escaneo"
+
+moverArchivo "imagenes"
+
+usarEscaneoProfundo
+
+notificar "Escaneo finalizado"
+
+retornar "COMPLETADO"
+
+}

@@ -1,0 +1,17 @@
+ACC=1
+MOVER=2
+ESCANEO=3
+RETORNAR=4
+NOTIFICAR=5
+STRING=6
+LKEY=7
+RKEY=8
+NEWLINE=9
+WS=10
+'accion'=1
+'moverArchivo'=2
+'usarEscaneoProfundo'=3
+'retornar'=4
+'notificar'=5
+'{'=7
+'}'=8

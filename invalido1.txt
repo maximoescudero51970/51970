@@ -1,0 +1,5 @@
+accion "backup" {
+moverArchivo documentos
+usarEscaneoProfundo
+retornar "OK"
+}

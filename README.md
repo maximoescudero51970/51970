@@ -1,180 +1,336 @@
-Analizador Sintáctico con ANTLR4 y JavaScript
+# Analizador Sintáctico con ANTLR4 y JavaScript
 
- Alumno
+## Alumno
 Maximo Escudero
 
- Legajo
+## Legajo
 51970
 
 ---
-Descripción del Proyecto
 
-Este proyecto consiste en la construcción de un analizador léxico y sintáctico utilizando ANTLR4 con JavaScript y Node.js.
+# Descripción General
 
-El analizador procesa un lenguaje específico orientado a acciones de backup y seguridad, permitiendo reconocer instrucciones como mover archivos, ejecutar escaneos, enviar notificaciones y retornar resultados.
+Este proyecto fue desarrollado utilizando ANTLR4, JavaScript y Node.js con el objetivo de construir un analizador léxico y sintáctico capaz de reconocer un pequeño lenguaje orientado a tareas de backup y seguridad.
 
-Además del análisis sintáctico, el programa también interpreta algunas instrucciones generando y ejecutando código JavaScript mediante el patrón Visitor.
+La idea principal fue crear una DSL (Domain Specific Language) simple pero funcional, permitiendo interpretar acciones relacionadas con mover archivos, ejecutar escaneos, mostrar notificaciones y retornar resultados.
+
+Durante el desarrollo se trabajó con:
+
+- generación automática de Lexer y Parser usando ANTLR4
+- análisis léxico
+- análisis sintáctico
+- manejo de errores personalizados
+- Visitors
+- interpretación de instrucciones
+- generación dinámica de código JavaScript
+
+También se realizaron múltiples pruebas con entradas válidas e inválidas para verificar el correcto funcionamiento del analizador.
 
 ---
 
-Tecnologías utilizadas
+# Tecnologías Utilizadas
+
+Las herramientas utilizadas durante el desarrollo fueron:
 
 - JavaScript
 - Node.js
 - ANTLR4
 - Visual Studio Code
-
----
- Funcionalidades implementadas
-
-El proyecto realiza correctamente las siguientes tareas:
-
-1. Análisis Léxico
-
-Se reconocen los distintos tokens del lenguaje:
-
-- palabras reservadas
-- strings
-- llaves
-- saltos de línea
-
-El programa muestra una tabla de tokens indicando:
-
-- lexema
-- tipo de token
+- GitHub
 
 ---
 
- 2. Análisis Sintáctico
+# Objetivo del Proyecto
 
-El parser verifica que la entrada cumpla con la gramática asignada.
+El objetivo principal del trabajo fue implementar un analizador capaz de:
 
-En caso de errores:
+- reconocer tokens
+- validar estructuras sintácticas
+- detectar errores
+- generar árbol de derivación
+- interpretar instrucciones del lenguaje
 
-- informa la línea
-- la columna
-- el detalle del problema
-- el token inválido
+Además, se buscó que el programa pudiera mostrar mensajes de error claros indicando:
 
----
-
- 3. Árbol de Derivación
-
-El programa genera y muestra el árbol sintáctico de la entrada válida utilizando:
-
-```bash
-tree.toStringTree(parser.ruleNames)
-```
+- línea
+- columna
+- token inválido
+- descripción del problema detectado
 
 ---
 
-4. Interpretación
+# Estructura del Proyecto
 
-Se implementó un Visitor personalizado capaz de interpretar instrucciones del lenguaje.
-
-Ejemplos:
-
-- mover archivos
-- ejecutar escaneo profundo
-- mostrar notificaciones
-- retornar resultados
-
-También se genera código JavaScript dinámicamente utilizando `eval()`.
-
----
-
- Estructura del Proyecto
-
-Dentro de la carpeta:
+Dentro del repositorio se encuentra la carpeta:
 
 ```bash
 proyecto Node JS
 ```
 
-se encuentran:
+Dentro de esa carpeta se encuentran todos los archivos del proyecto:
 
 - gramática ANTLR
 - lexer generado
 - parser generado
 - listeners
 - visitors
-- archivo principal
-- ejemplos válidos e inválidos
+- index principal
+- archivos de entrada
+- ejemplos válidos
+- ejemplos inválidos
 
 ---
 
- Archivos de ejemplo incluidos
+# Funcionamiento General
 
-El repositorio contiene 4 ejemplos:
-
- Entradas válidas
-
-- valido1.txt
-- valido2.txt
-
- Entradas inválidas
-
-- invalido1.txt
-- invalido2.txt
-
-Los archivos inválidos fueron creados para probar la detección de errores léxicos y sintácticos.
-
----
-
-Requisitos
-
-Para ejecutar el proyecto se necesita tener instalado:
-
-- Node.js
-- Java
-- ANTLR4
-
----
-
-Instalación
-
-Abrir una terminal dentro de la carpeta:
-
-```bash
-proyecto Node JS
-```
-
-Instalar dependencias:
-
-```bash
-npm install
-```
-
----
-
-Ejecución
-
-Ejecutar:
-
-```bash
-npm start
-```
-
-El programa leerá automáticamente el archivo:
+El programa toma una entrada desde el archivo:
 
 ```bash
 input.txt
 ```
 
-y mostrará:
+A partir de esa entrada realiza:
+
+## 1. Análisis Léxico
+
+Se reconocen los distintos tokens definidos en la gramática.
+
+Ejemplo:
+
+- palabras reservadas
+- strings
+- llaves
+- saltos de línea
+
+Luego se imprime una tabla de tokens indicando:
+
+- lexema
+- tipo de token
+
+---
+
+## 2. Análisis Sintáctico
+
+El parser verifica si la entrada cumple correctamente con la gramática definida.
+
+Si la entrada es válida:
+
+- genera el árbol de derivación
+- ejecuta el visitor
+
+Si la entrada es inválida:
+
+- informa errores sintácticos
+- indica línea y columna
+- muestra el token problemático
+
+---
+
+## 3. Visitor Personalizado
+
+Se implementó un Visitor personalizado capaz de interpretar instrucciones del lenguaje.
+
+Por ejemplo:
+
+```txt
+accion "backup" {
+
+moverArchivo "documentos"
+
+usarEscaneoProfundo
+
+notificar "Proceso terminado"
+
+retornar "OK"
+
+}
+```
+
+El Visitor interpreta las instrucciones y genera comportamiento dinámico utilizando JavaScript.
+
+---
+
+# Manejo de Errores
+
+Uno de los puntos trabajados durante el desarrollo fue el manejo de errores sintácticos.
+
+Cuando ocurre un error el programa muestra información como:
+
+```bash
+Error sintáctico en línea 2, columna 13
+Detalle: missing STRING
+Token inválido: documentos
+```
+
+Esto permite identificar rápidamente dónde se encuentra el problema dentro de la entrada.
+
+---
+
+# Ejemplos Incluidos
+
+El proyecto contiene ejemplos válidos e inválidos para realizar pruebas.
+
+## Entradas válidas
+
+- valido1.txt
+- valido2.txt
+
+## Entradas inválidas
+
+- invalido1.txt
+- invalido2.txt
+
+Los archivos inválidos fueron creados intencionalmente para probar el reconocimiento de errores léxicos y sintácticos.
+
+---
+
+# Requisitos Previos
+
+Antes de ejecutar el proyecto es necesario tener instalado:
+
+## Node.js
+
+Descarga:
+
+https://nodejs.org/
+
+---
+
+## Java
+
+ANTLR4 requiere Java para funcionar correctamente.
+
+---
+
+## Visual Studio Code
+
+Editor utilizado durante el desarrollo.
+
+---
+
+# Instalación y Ejecución Paso a Paso
+
+## Paso 1 — Descargar el repositorio
+
+Clonar el repositorio utilizando Git:
+
+```bash
+git clone https://github.com/maximoescudero51970/51970.git
+```
+
+También puede descargarse manualmente desde GitHub utilizando:
+
+```bash
+Code -> Download ZIP
+```
+
+---
+
+## Paso 2 — Abrir el proyecto
+
+Abrir Visual Studio Code.
+
+Luego seleccionar:
+
+```bash
+Archivo -> Abrir Carpeta
+```
+
+y abrir la carpeta:
+
+```bash
+proyecto Node JS
+```
+
+---
+
+## Paso 3 — Abrir una terminal
+
+Dentro de Visual Studio Code abrir una terminal desde:
+
+```bash
+Terminal -> New Terminal
+```
+
+La terminal debería quedar posicionada dentro de:
+
+```bash
+proyecto Node JS
+```
+
+---
+
+## Paso 4 — Instalar dependencias
+
+Ejecutar:
+
+```bash
+npm install
+```
+
+Esto instalará automáticamente todas las dependencias necesarias del proyecto.
+
+---
+
+## Paso 5 — Preparar una entrada
+
+Abrir el archivo:
+
+```bash
+input.txt
+```
+
+y escribir una entrada válida o inválida.
+
+Ejemplo válido:
+
+```txt
+accion "backup" {
+
+moverArchivo "documentos"
+
+usarEscaneoProfundo
+
+notificar "Proceso terminado"
+
+retornar "OK"
+
+}
+```
+
+---
+
+## Paso 6 — Ejecutar el programa
+
+Ejecutar en terminal:
+
+```bash
+npm start
+```
+
+---
+
+## Paso 7 — Resultado esperado
+
+Al ejecutar el programa se mostrará:
 
 - tabla de tokens
 - validación sintáctica
 - árbol de derivación
-- interpretación del código
+- errores sintácticos si existen
+- ejecución del visitor
 
+---
 
-
- Ejemplo de salida
-
-El programa puede mostrar resultados como:
+# Ejemplo Real de Salida
 
 ```bash
+TABLA DE TOKENS
+
+Token: accion | Tipo: ACC
+Token: "backup" | Tipo: STRING
+Token: moverArchivo | Tipo: MOVER
+
 Entrada válida.
 
 Árbol de derivación:
@@ -185,13 +341,21 @@ Ejecutando accion "backup"
 Moviendo archivo a "documentos"
 
 Proceso terminado
+```
 
+---
 
+# Consideraciones Finales
 
- Observaciones
+Durante el desarrollo se realizaron varias pruebas para validar:
 
-Durante el desarrollo se realizaron pruebas con múltiples entradas válidas e inválidas para verificar el correcto funcionamiento del lexer y parser.
+- reconocimiento de tokens
+- detección de errores
+- generación correcta del árbol sintáctico
+- funcionamiento del visitor
 
-También se implementó manejo personalizado de errores sintácticos para mejorar la salida mostrada al usuario.
+El proyecto fue desarrollado completamente utilizando Visual Studio Code junto con Node.js y ANTLR4.
+
+También se trabajó en mejorar la salida de errores para que el programa indique claramente dónde ocurre cada problema dentro de la entrada analizada.
 
 ---
